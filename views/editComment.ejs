@@ -1,6 +1,6 @@
 <%- include('partials/header') -%>
 
-
+<div class="container">
 <form class="edit-action-form" action="/articles/<%= article.id %>/comments/<%= comment.id %>/edit" method="POST"> 
     <textarea class="comment-area" name="content" required> <%=comment.content %>
     </textarea>
