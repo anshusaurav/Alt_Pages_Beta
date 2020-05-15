@@ -24,6 +24,7 @@
     "showdown": "^1.9.1"
   },
   "devDependencies": {
-    "passport-github": "^1.1.0"
+    "passport-github": "^1.1.0",
+    "passport-google-oauth": "^2.0.0"
   }
 }
