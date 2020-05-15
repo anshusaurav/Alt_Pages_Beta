@@ -1,9 +1,10 @@
 var passport = require("passport");
 var GitHubStrategy = require('passport-github').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 var User = require("../models/user");
 passport.use(new GitHubStrategy({
-    clientID: process.env.Client_ID,
-    clientSecret: process.env.Client_Secret ,
+    clientID: process.env.Github_Client_ID,
+    clientSecret: process.env.Github_Client_Secret ,
     callbackURL: "/auth/github/callback"
   },
   function(accessToken, refreshToken, profile, cb) {
@@ -29,6 +30,18 @@ passport.use(new GitHubStrategy({
     }); 
   }
 ));
+passport.use(new FacebookStrategy({
+  clientID: process.env.Facebook_Client_ID,
+  clientSecret: process.env.Facebook_Client_Secret ,
+  callbackURL: "http://localhost:3000/auth/facebook/callback",
+  profileFields: ['id', 'displayName', 'photos', 'emails']
+},
+function(accessToken, refreshToken, profile, cb) {
+  console.log(profile);
+  
+}
+));
+
 passport.serializeUser((user, cb) => {
   // console.log(user);
   cb(null, user.id)

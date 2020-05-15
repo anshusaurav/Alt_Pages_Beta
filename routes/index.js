@@ -28,10 +28,22 @@ router.get('/', function(req, res) {
 router.get('/auth/github', passport.authenticate('github'));
 
 router.get('/auth/github/callback', passport.authenticate('github',
-  {failureRedirect:'/failure'}), (req, res, next) =>{
+  {failureRedirect:'/login'}), (req, res) =>{
     // console.log('Sunny angry');
     console.log(req.session.passport);
     req.session.userId = req.session.passport.user;
     return res.redirect('/articles');
   })
+
+router.get('/auth/facebook',
+passport.authenticate('facebook'));
+
+router.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    console.log(req.session.passport);
+    req.session.userId = req.session.passport.user;
+    return res.redirect('/articles');
+  });
 module.exports = router;
