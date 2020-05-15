@@ -7,8 +7,8 @@ var Tag = require("../models/tag");
 var User = require("../models/user");
 /* GET home page. */
 router.get('/', function(req, res) {
-  console.log('HERE');
-  console.log(req.session);
+  // console.log('HERE');
+  // console.log(req.session);
   // Get an array of flash messages by passing the key to req.flash()
   Tag.find({}, (err, tags) =>{
     if(err)
@@ -29,7 +29,9 @@ router.get('/auth/github', passport.authenticate('github'));
 
 router.get('/auth/github/callback', passport.authenticate('github',
   {failureRedirect:'/failure'}), (req, res, next) =>{
-    console.log(res);
+    // console.log('Sunny angry');
+    console.log(req.session.passport);
+    req.session.userId = req.session.passport.user;
     return res.redirect('/articles');
   })
 module.exports = router;

@@ -36,11 +36,6 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(express.static(path.join(__dirname, 'public')));
-
-
 app.use(cookieParser());
 app.use(session(
   {
@@ -50,6 +45,12 @@ app.use(session(
     store: new MongoStore({ mongooseConnection: mongoose.connection })
   }
 ));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(express.static(path.join(__dirname, 'public')));
+
+
+
 app.use(flash());
 
 app.use((req, res, next) =>{

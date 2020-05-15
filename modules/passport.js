@@ -7,16 +7,19 @@ passport.use(new GitHubStrategy({
     callbackURL: "/auth/github/callback"
   },
   function(accessToken, refreshToken, profile, cb) {
-    // console.log(profile);
-    User.findOne({ email: profile.email }, function (err, user) {
-      
+    console.log(profile);
+    User.findOne({ email: profile.emails[0].value }, function (err, user) {
+      if(err)
+        return cb(err);
       if(!user){
-        let newUser = {email: profile.email, name: profile.name, password:"password"}; 
-        User.create(newUser, (err, data) =>{
-          // req.session.userId = user.id;
+        console.log('User not found. Creating new');
+        let newUser = {email: profile.emails[0].value, name: profile.displayName, password:"password"}; 
+        User.create(newUser, (err, user) =>{
+          console.log('User created');
+          // console.log(user);
           if(err)
-            return cb(err, false);
-          return cb(null, data);
+            return cb(err);
+          return cb(null, user);
 
         });
       }
@@ -27,14 +30,14 @@ passport.use(new GitHubStrategy({
   }
 ));
 passport.serializeUser((user, cb) => {
-    cb(null, user.id)
+  // console.log(user);
+  cb(null, user.id)
 });
 
 passport.deserializeUser((id, cb) => {
   User.findById(id, (err, user) => {
     if(err)
-      cb(err, false);
-    cb(err, user);
-
+      cb(err);
+    cb(null, user);
   });
 });
