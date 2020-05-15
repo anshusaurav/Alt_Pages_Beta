@@ -1,4 +1,5 @@
 var express = require('express');
+var passport = require('passport');
 var router = express.Router();
 var Article = require("../models/article");
 var Comment = require("../models/comment");
@@ -24,4 +25,11 @@ router.get('/', function(req, res) {
   });
 });
 
+router.get('/auth/github', passport.authenticate('github'));
+
+router.get('/auth/github/callback', passport.authenticate('github',
+  {failureRedirect:'/failure'}), (req, res, next) =>{
+    console.log(res);
+    return res.redirect('/articles');
+  })
 module.exports = router;

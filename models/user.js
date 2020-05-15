@@ -12,11 +12,9 @@ var userSchema = new Schema({
         required: true,
         unique: true
     },
-    username: {
-        type: String,
-    },
     password: {
         type: String,
+
     },
     bio:{
         type: String,

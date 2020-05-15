@@ -45,9 +45,7 @@
         </div>
         <div class='tags-grid'>
             <% article.tags.forEach(element => { %>
-                <div class="tag-elem-div">
-                    <a href="/tags/<%= element %>"class="tag-elem"> <%= element%></a>
-                </div>
+                <div class="tag-elem-div"><a href="/tags/<%= element %>"class="tag-elem"> <%= element%></a></div>
             <% }); %>
         </div>
     </div>

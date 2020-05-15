@@ -8,7 +8,7 @@
             <textarea name="description" rows="4" cols="100"><%= article.description %></textarea>
         </div>
         <div class="add-elem-div">
-            <input type="text" name="tags" value="<%= article.tags.join(', ')%>">
+            <input type="text" name="tags" value="<%= article.tags.join(', ')%>" placeholder="">
         </div>
         <div class="add-elem-div">
             <input type="submit" value="Save Changes" onlick='confirmEdit()'>

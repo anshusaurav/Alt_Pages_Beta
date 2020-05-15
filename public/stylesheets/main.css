@@ -129,7 +129,7 @@ a {
 }
 .add-article{
   border-radius: 16px;
-  border: 2px ridge rgb(17, 16, 16);
+  /* border: 2px ridge rgb(17, 16, 16); */
   padding: 2rem;
 }
 .add-elem-div{
