@@ -107,24 +107,7 @@
     <a href='/articles'><i title="Back" class="fas fa-backward"></i></a>
     
 </div>
-<script src="/javascripts/script.js" defer></script>
 <script>
-
-    let output = document.querySelector('.showdown-area');
-    let converter = new showdown.Converter({
-    tables: true,
-    simpleLineBreaks: true }),
-
-    text = article.description,
-    htmlMD = converter.makeHtml(text);
-    html = filterXSS(htmlMD); // xss sanitize-https://github.com/leizongmin/js-xss
-
-    converter.setFlavor('github');
-
-    if (text) {
-        output.innerHTML = html;
-    } else {
-        output.innerHTML = `<h3>${initText}</h3>`;
-    }
+    
 </script>
 <%- include('partials/footer') -%>
