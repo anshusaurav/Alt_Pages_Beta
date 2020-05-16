@@ -32,7 +32,10 @@
             <label for="name">Name</label>
             <input type="text" name="name" id="myBName" required value ="<%= user.name %>">
           </div>
-          
+          <div class='edit-profile-internal'>
+            <label for="email">Email</label>
+            <input type="text" name="email" id="myBName" required value ="<%= user.email %>">
+          </div>
           <div class='edit-profile-internal'>
             <label for="bio">Bio</label>
             <textarea type="text" name="bio" id="myBio" placeholder= "" /><%= user.bio %></textarea>

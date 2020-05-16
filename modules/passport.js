@@ -8,7 +8,7 @@ passport.use(new GitHubStrategy({
     callbackURL: "/auth/github/callback"
   },
   function(accessToken, refreshToken, profile, cb) {
-    console.log(profile);
+    // console.log(profile);
     User.findOne({ email: profile.emails[0].value }, function (err, user) {
       if(err)
         return cb(err);
@@ -33,12 +33,29 @@ passport.use(new GitHubStrategy({
 passport.use(new FacebookStrategy({
   clientID: process.env.Facebook_Client_ID,
   clientSecret: process.env.Facebook_Client_Secret ,
-  callbackURL: "http://localhost:3000/auth/facebook/callback",
-  profileFields: ['id', 'displayName', 'photos', 'emails']
+  callbackURL: "http://localhost:3000/auth/facebook/callback"
 },
 function(accessToken, refreshToken, profile, cb) {
-  console.log(profile);
-  
+  // console.log(profile);
+  User.findOne({fb_oauth: profile._json.id }, function (err, user) {
+    if(err)
+      return cb(err);
+    if(!user){
+      console.log('User not found. Creating new');
+      let newUser = {fb_oauth: profile._json.id, name: profile._json.name, password:"password"}; 
+      User.create(newUser, (err, user) =>{
+        console.log('User created');
+        // console.log(user);
+        if(err)
+          return cb(err);
+        return cb(null, user);
+
+      });
+    }
+    else
+      return cb(null, user);
+    
+  }); 
 }
 ));
 

@@ -13,9 +13,14 @@ var userSchema = new Schema({
     },
     password: {
         type: String,
-
     },
-    bio:{
+    fb_oauth:{
+        type: String,
+    },
+    github_oauth: {
+        type: String,
+    },
+    bio: {
         type: String,
         default:"Add Bio"
     },
